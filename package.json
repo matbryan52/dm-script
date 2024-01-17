@@ -1,8 +1,9 @@
 {
   "name": "dm-script",
   "displayName": "dm-script",
-  "description": "DM language support (proto)",
+  "description": "DM syntax highlighting support",
   "version": "0.0.1",
+  "repository": "https: //github.com/matbryan52/dm-script",
   "engines": {
     "vscode": "^1.82.0"
   },
