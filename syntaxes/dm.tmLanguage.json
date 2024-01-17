@@ -165,7 +165,7 @@
 			]
 		},
 		"anon_pattern_1": {
-			"match": "\\b(break|continue|else|for|if|return|while)\\b",
+			"match": "(?i)\\b(break|continue|else|for|if|return|while|try|catch)\\b",
 			"name": "keyword.control.c"
 		},
 		"anon_pattern_13": {
