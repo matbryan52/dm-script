@@ -1,13 +1,21 @@
 # dm-script README
 
-This is the README for the extension "dm-script".
+Provides basic syntax highlighting support for the
+Gatan Digital Micrograph scripting language in VSCode.
 
-## Features
+The grammar is a heavily reduced and partially extended
+version of the builtin C-language support.
 
-Provides basic support from DM script in VSCode
+Known issues:
+
+- Method access on an object name causes different highlighting
+  of that name than simple assignment or use of that object's name,
+  but only when in a scope/block
+
+This extension is not affiliated with or supported by Gatan.
 
 ## Release Notes
 
-### 1.0.0
+### 0.0.1
 
 Initial dm-script support
