@@ -1,0 +1,25 @@
+{
+  "name": "dm-script",
+  "displayName": "dm-script",
+  "description": "DM language support (proto)",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "dm",
+      "aliases": ["DM Script", "dm"],
+      "extensions": [".s"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "dm",
+      "scopeName": "source.dm",
+      "path": "./syntaxes/dm.tmLanguage.json"
+    }]
+  }
+}
