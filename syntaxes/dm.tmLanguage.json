@@ -4,34 +4,13 @@
 	"scopeName": "source.dm",
 	"patterns": [
 		{
-			"include": "#preprocessor-rule-enabled"
-		},
-		{
-			"include": "#preprocessor-rule-disabled"
-		},
-		{
-			"include": "#preprocessor-rule-conditional"
-		},
-		{
-			"include": "#predefined_macros"
-		},
-		{
 			"include": "#comments"
-		},
-		{
-			"include": "#switch_statement"
 		},
 		{
 			"include": "#anon_pattern_1"
 		},
 		{
 			"include": "#storage_types"
-		},
-		{
-			"include": "#anon_pattern_2"
-		},
-		{
-			"include": "#anon_pattern_3"
 		},
 		{
 			"include": "#anon_pattern_4"
@@ -55,42 +34,6 @@
 			"include": "#strings"
 		},
 		{
-			"include": "#anon_pattern_range_1"
-		},
-		{
-			"include": "#anon_pattern_range_2"
-		},
-		{
-			"include": "#anon_pattern_range_3"
-		},
-		{
-			"include": "#pragma-mark"
-		},
-		{
-			"include": "#anon_pattern_range_4"
-		},
-		{
-			"include": "#anon_pattern_range_5"
-		},
-		{
-			"include": "#anon_pattern_range_6"
-		},
-		{
-			"include": "#anon_pattern_8"
-		},
-		{
-			"include": "#anon_pattern_9"
-		},
-		{
-			"include": "#anon_pattern_10"
-		},
-		{
-			"include": "#anon_pattern_11"
-		},
-		{
-			"include": "#anon_pattern_12"
-		},
-		{
 			"include": "#anon_pattern_13"
 		},
 		{
@@ -110,9 +53,6 @@
 		},
 		{
 			"include": "#anon_pattern_range_9"
-		},
-		{
-			"include": "#anon_pattern_14"
 		},
 		{
 			"include": "#anon_pattern_15"
@@ -165,16 +105,12 @@
 			]
 		},
 		"anon_pattern_1": {
-			"match": "(?i)\\b(break|continue|else|for|if|return|while|try|catch)\\b",
+			"match": "(?i)\\b(break|continue|else|for|if|return|while|try|catch|class)\\b",
 			"name": "keyword.control.c"
 		},
 		"anon_pattern_13": {
 			"match": "\\b([A-Za-z0-9_]+_t)\\b",
 			"name": "support.type.posix-reserved.c"
-		},
-		"anon_pattern_14": {
-			"match": ";",
-			"name": "punctuation.terminator.statement.c"
 		},
 		"anon_pattern_15": {
 			"match": ",",
