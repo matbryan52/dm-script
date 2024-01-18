@@ -11,6 +11,9 @@ Known issues:
 - Method access on an object name causes different highlighting
   of that name than simple assignment or use of that object's name,
   but only when in a scope/block
+- Method definition within a class block is matched as a function
+  call, leading to slightly different highlighting than in a normal
+  function definition.
 - Some remnants of the C grammar remain
 
 This extension is not affiliated with or supported by Gatan.
