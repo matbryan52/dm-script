@@ -113,7 +113,7 @@
 			"name": "support.type.posix-reserved.c"
 		},
 		"anon_pattern_15": {
-			"match": ",",
+			"match": ",|;",
 			"name": "punctuation.separator.delimiter.c"
 		},
 		"anon_pattern_4": {
@@ -134,7 +134,7 @@
 		},
 		"anon_pattern_range_7": {
 			"name": "meta.function.c",
-			"begin": "(?<!\\w)(?!\\s*(?:continue|return|false|while|float|break|long|else|bool|true|NULL|void|char|for|not|int|and|xor|do|or|if|foreach)\\s*\\()(?=[a-zA-Z_]\\w*\\s*\\()",
+			"begin": "(?<!\\w)(?!\\s*(?i)(?:continue|return|false|while|float|break|long|else|bool|true|NULL|void|char|for|not|int|and|xor|do|or|if|foreach)\\s*\\()(?=[a-zA-Z_]\\w*\\s*\\()",
 			"end": "(?!\\G)(?<=\\))",
 			"patterns": [
 				{
@@ -239,6 +239,9 @@
 				{
 					"include": "#member_access"
 				},
+				{
+					"include": "#anon_pattern_range_7"
+				},				
 				{
 					"include": "#c_function_call"
 				},
