@@ -105,7 +105,7 @@
 			]
 		},
 		"anon_pattern_1": {
-			"match": "(?i)\\b(break|continue|else|for|if|return|while|try|catch|class|module)\\b",
+			"match": "(?i)\\b(break|continue|else|for|foreach|if|return|while|try|catch|recover|class|interface|module)\\b",
 			"name": "keyword.control.c"
 		},
 		"anon_pattern_13": {
@@ -129,12 +129,12 @@
 			"name": "variable.other.readwrite.static.mac-classic.c"
 		},
 		"anon_pattern_7": {
-			"match": "\\b(true|false|TRUE|FALSE)\\b",
+			"match": "(?i)\\b(icol|icolumn|iheight|ipoints|iradius|irow|itheta|iwidth|iplane)\\b",
 			"name": "constant.language.c"
 		},
 		"anon_pattern_range_7": {
 			"name": "meta.function.c",
-			"begin": "(?<!\\w)(?!\\s*(?:continue|return|false|while|float|break|long|else|bool|true|NULL|void|char|for|not|int|and|xor|do|or|if)\\s*\\()(?=[a-zA-Z_]\\w*\\s*\\()",
+			"begin": "(?<!\\w)(?!\\s*(?:continue|return|false|while|float|break|long|else|bool|true|NULL|void|char|for|not|int|and|xor|do|or|if|foreach)\\s*\\()(?=[a-zA-Z_]\\w*\\s*\\()",
 			"end": "(?!\\G)(?<=\\))",
 			"patterns": [
 				{
@@ -303,7 +303,7 @@
 			]
 		},
 		"c_function_call": {
-			"begin": "(?x)(?i)\n(?!(?:while|for|do|if|else|switch|class|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
+			"begin": "(?x)(?i)\n(?!(?:while|for|foreach|do|if|else|switch|class|interface|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
 			"end": "(?<=\\))(?!\\w)",
 			"name": "meta.function-call.c",
 			"patterns": [
@@ -354,10 +354,6 @@
 													"name": "variable.parameter.c"
 												}
 											}
-										},
-										{
-											"match": "(?:\\b[A-Z]+:|@[a-z_]+:)",
-											"name": "storage.type.class.gtkdoc"
 										}
 									]
 								},
@@ -392,10 +388,6 @@
 															"name": "variable.parameter.c"
 														}
 													}
-												},
-												{
-													"match": "(?:\\b[A-Z]+:|@[a-z_]+:)",
-													"name": "storage.type.class.gtkdoc"
 												}
 											]
 										},
@@ -443,10 +435,6 @@
 													"name": "variable.parameter.c"
 												}
 											}
-										},
-										{
-											"match": "(?:\\b[A-Z]+:|@[a-z_]+:)",
-											"name": "storage.type.class.gtkdoc"
 										}
 									]
 								},
@@ -533,9 +521,6 @@
 			"patterns": [
 				{
 					"include": "#disabled"
-				},
-				{
-					"include": "#pragma-mark"
 				}
 			]
 		},
@@ -567,7 +552,7 @@
 					"include": "#operators"
 				},
 				{
-					"begin": "(?x)(?i)\n(?!(?:while|for|do|if|else|switch|class|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+					"begin": "(?x)(?i)\n(?!(?:while|for|foreach|do|if|else|switch|class|interface|try|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
 					"beginCaptures": {
 						"1": {
 							"name": "entity.name.function.c"
@@ -1154,16 +1139,8 @@
 					"name": "keyword.operator.increment.c"
 				},
 				{
-					"match": "%=|\\+=|-=|\\*=|(?<!\\()/=",
+					"match": "\\+=|-=|:=|\\*=|(?<!\\()/=",
 					"name": "keyword.operator.assignment.compound.c"
-				},
-				{
-					"match": "&=|\\^=|<<=|>>=|\\|=",
-					"name": "keyword.operator.assignment.compound.bitwise.c"
-				},
-				{
-					"match": "<<|>>",
-					"name": "keyword.operator.bitwise.shift.c"
 				},
 				{
 					"match": "!=|<=|>=|==|<|>",
@@ -1351,228 +1328,16 @@
 		"storage_types": {
 			"patterns": [
 				{
-					"match": "(?-mix:(?<!\\w)(?i)(?:image|realimage|compleximage|rgbimage|number|realnumber|complexnumber|imageDisplay|string|object|ROI|TagGroup|void|uiframe)(?!\\w))",
+					"match": "(?-mix:(?<!\\w)(?i)(?:void|string|number|realnumber|complexnumber|image|realimage|compleximage|rgbimage)(?!\\w))",
 					"name": "storage.type.built-in.primitive.c"
 				},
 				{
-					"match": "(?-mix:(?<!\\w)(?:uint|id_t|id_t)(?!\\w))",
+					"match": "(?-mix:(?<!\\w)(?i)(?:documentwindow|compounddocument|imagedocument|imagedisplay|rasterimagedisplay|spreadsheetimagedisplay|surfaceplotimagedisplay|lineplotimagedisplay|realsubarea|complexsubarea|rgbsubarea|object|thread|menuitem|component|roi|taggroup|uiframe|window|scriptobject)(?!\\w))",
 					"name": "storage.type.built-in.c"
 				},
 				{
 					"match": "(?-mix:\\b(enum|struct|union)\\b)",
 					"name": "storage.type.$1.c"
-				},
-				{
-					"name": "meta.asm.c",
-					"begin": "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)",
-					"beginCaptures": {
-						"1": {
-							"name": "storage.type.asm.c"
-						},
-						"2": {
-							"name": "storage.modifier.c"
-						}
-					},
-					"end": "(?!\\G)",
-					"patterns": [
-						{
-							"match": "(?:^)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:\\n|$)",
-							"captures": {
-								"1": {
-									"patterns": [
-										{
-											"include": "#inline_comment"
-										}
-									]
-								},
-								"2": {
-									"name": "comment.block.c punctuation.definition.comment.begin.c"
-								},
-								"3": {
-									"name": "comment.block.c"
-								},
-								"4": {
-									"patterns": [
-										{
-											"match": "\\*\\/",
-											"name": "comment.block.c punctuation.definition.comment.end.c"
-										},
-										{
-											"match": "\\*",
-											"name": "comment.block.c"
-										}
-									]
-								}
-							}
-						},
-						{
-							"include": "#comments"
-						},
-						{
-							"begin": "(((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))\\()",
-							"beginCaptures": {
-								"1": {
-									"name": "punctuation.section.parens.begin.bracket.round.assembly.c"
-								},
-								"2": {
-									"patterns": [
-										{
-											"include": "#inline_comment"
-										}
-									]
-								},
-								"3": {
-									"name": "comment.block.c punctuation.definition.comment.begin.c"
-								},
-								"4": {
-									"name": "comment.block.c"
-								},
-								"5": {
-									"patterns": [
-										{
-											"match": "\\*\\/",
-											"name": "comment.block.c punctuation.definition.comment.end.c"
-										},
-										{
-											"match": "\\*",
-											"name": "comment.block.c"
-										}
-									]
-								}
-							},
-							"end": "(\\))",
-							"endCaptures": {
-								"1": {
-									"name": "punctuation.section.parens.end.bracket.round.assembly.c"
-								}
-							},
-							"patterns": [
-								{
-									"name": "string.quoted.double.c",
-									"contentName": "meta.embedded.assembly.c",
-									"begin": "(R?)(\")",
-									"beginCaptures": {
-										"1": {
-											"name": "meta.encoding.c"
-										},
-										"2": {
-											"name": "punctuation.definition.string.begin.assembly.c"
-										}
-									},
-									"end": "(\")",
-									"endCaptures": {
-										"1": {
-											"name": "punctuation.definition.string.end.assembly.c"
-										}
-									},
-									"patterns": [
-										{
-											"include": "source.asm"
-										},
-										{
-											"include": "source.x86"
-										},
-										{
-											"include": "source.x86_64"
-										},
-										{
-											"include": "source.arm"
-										},
-										{
-											"include": "#backslash_escapes"
-										},
-										{
-											"include": "#string_escaped_char"
-										}
-									]
-								},
-								{
-									"begin": "(\\()",
-									"beginCaptures": {
-										"1": {
-											"name": "punctuation.section.parens.begin.bracket.round.assembly.inner.c"
-										}
-									},
-									"end": "(\\))",
-									"endCaptures": {
-										"1": {
-											"name": "punctuation.section.parens.end.bracket.round.assembly.inner.c"
-										}
-									},
-									"patterns": [
-										{
-											"include": "#evaluation_context"
-										}
-									]
-								},
-								{
-									"match": "\\[((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))([a-zA-Z_]\\w*)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))\\]",
-									"captures": {
-										"1": {
-											"patterns": [
-												{
-													"include": "#inline_comment"
-												}
-											]
-										},
-										"2": {
-											"name": "comment.block.c punctuation.definition.comment.begin.c"
-										},
-										"3": {
-											"name": "comment.block.c"
-										},
-										"4": {
-											"patterns": [
-												{
-													"match": "\\*\\/",
-													"name": "comment.block.c punctuation.definition.comment.end.c"
-												},
-												{
-													"match": "\\*",
-													"name": "comment.block.c"
-												}
-											]
-										},
-										"5": {
-											"name": "variable.other.asm.label.c"
-										},
-										"6": {
-											"patterns": [
-												{
-													"include": "#inline_comment"
-												}
-											]
-										},
-										"7": {
-											"name": "comment.block.c punctuation.definition.comment.begin.c"
-										},
-										"8": {
-											"name": "comment.block.c"
-										},
-										"9": {
-											"patterns": [
-												{
-													"match": "\\*\\/",
-													"name": "comment.block.c punctuation.definition.comment.end.c"
-												},
-												{
-													"match": "\\*",
-													"name": "comment.block.c"
-												}
-											]
-										}
-									}
-								},
-								{
-									"match": ":",
-									"name": "punctuation.separator.delimiter.colon.assembly.c"
-								},
-								{
-									"include": "#comments"
-								}
-							]
-						}
-					]
 				}
 			]
 		},
