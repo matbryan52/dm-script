@@ -240,9 +240,6 @@
 					"include": "#member_access"
 				},
 				{
-					"include": "#anon_pattern_range_7"
-				},				
-				{
 					"include": "#c_function_call"
 				},
 				{
