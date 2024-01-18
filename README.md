@@ -12,9 +12,14 @@ Known issues:
   of that name than simple assignment or use of that object's name,
   but only when in a scope/block
 - Some remnants of the C grammar remain
-- Poor familiarity with the more in-depths aspects of texmate grammars
 
 This extension is not affiliated with or supported by Gatan.
+
+## Installation
+
+Download the latest `.vsix` file from the releases page. Select
+`Install from VSIX from Extensions > Options` (or use the
+command pallette.)
 
 ## Release Notes
 
