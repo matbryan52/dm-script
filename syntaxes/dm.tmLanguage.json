@@ -134,7 +134,7 @@
 		},
 		"anon_pattern_range_7": {
 			"name": "meta.function.c",
-			"begin": "(?<!\\w)(?!\\s*(?i)(?:continue|return|false|while|float|break|long|else|bool|true|NULL|void|char|for|not|int|and|xor|do|or|if|foreach)\\s*\\()(?=[a-zA-Z_]\\w*\\s*\\()",
+			"begin": "(?<!\\w)(?!\\s*(?i)(?:continue|return|false|while|break|else|void|for|foreach|if|foreach|try|catch)\\s*\\()(?=[a-zA-Z_]\\w*\\s*\\()",
 			"end": "(?!\\G)(?<=\\))",
 			"patterns": [
 				{
@@ -303,7 +303,7 @@
 			]
 		},
 		"c_function_call": {
-			"begin": "(?x)(?i)\n(?!(?:while|for|foreach|do|if|else|switch|class|interface|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
+			"begin": "(?x)(?i)\n(?!(?:while|for|foreach|do|if|else|class|interface|try|catch|return)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
 			"end": "(?<=\\))(?!\\w)",
 			"name": "meta.function-call.c",
 			"patterns": [
