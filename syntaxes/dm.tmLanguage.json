@@ -597,6 +597,32 @@
 				}
 			]
 		},
+		"function-definition": {
+			"name": "meta.function.definition.parameters.c",
+			"begin": "(?x)(?i)\n(?!(?:while|for|foreach|if|else|class|try|catch|return)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.c"
+				},
+				"2": {
+					"name": "punctuation.section.parameters.begin.bracket.round.c"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.parameters.end.bracket.round.c"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#probably_a_parameter"
+				},
+				{
+					"include": "#function-innards"
+				}
+			]
+		},
 		"function-innards": {
 			"patterns": [
 				{
@@ -609,33 +635,7 @@
 					"include": "#operators"
 				},
 				{
-					"include": "#vararg_ellipses"
-				},
-				{
-					"name": "meta.function.definition.parameters.c",
-					"begin": "(?x)(?i)\n(?!(?:while|for|do|if|else|switch|class|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
-					"beginCaptures": {
-						"1": {
-							"name": "entity.name.function.c"
-						},
-						"2": {
-							"name": "punctuation.section.parameters.begin.bracket.round.c"
-						}
-					},
-					"end": "\\)",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.section.parameters.end.bracket.round.c"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#probably_a_parameter"
-						},
-						{
-							"include": "#function-innards"
-						}
-					]
+					"include": "#function-definition"
 				},
 				{
 					"begin": "\\(",
@@ -1238,93 +1238,6 @@
 				}
 			}
 		},
-		"static_assert": {
-			"begin": "((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))((?<!\\w)static_assert|_Static_assert(?!\\w))((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))(\\()",
-			"beginCaptures": {
-				"1": {
-					"patterns": [
-						{
-							"include": "#inline_comment"
-						}
-					]
-				},
-				"2": {
-					"name": "comment.block.c punctuation.definition.comment.begin.c"
-				},
-				"3": {
-					"name": "comment.block.c"
-				},
-				"4": {
-					"patterns": [
-						{
-							"match": "\\*\\/",
-							"name": "comment.block.c punctuation.definition.comment.end.c"
-						},
-						{
-							"match": "\\*",
-							"name": "comment.block.c"
-						}
-					]
-				},
-				"5": {
-					"name": "keyword.other.static_assert.c"
-				},
-				"6": {
-					"patterns": [
-						{
-							"include": "#inline_comment"
-						}
-					]
-				},
-				"7": {
-					"name": "comment.block.c punctuation.definition.comment.begin.c"
-				},
-				"8": {
-					"name": "comment.block.c"
-				},
-				"9": {
-					"patterns": [
-						{
-							"match": "\\*\\/",
-							"name": "comment.block.c punctuation.definition.comment.end.c"
-						},
-						{
-							"match": "\\*",
-							"name": "comment.block.c"
-						}
-					]
-				},
-				"10": {
-					"name": "punctuation.section.arguments.begin.bracket.round.static_assert.c"
-				}
-			},
-			"end": "(\\))",
-			"endCaptures": {
-				"1": {
-					"name": "punctuation.section.arguments.end.bracket.round.static_assert.c"
-				}
-			},
-			"patterns": [
-				{
-					"name": "meta.static_assert.message.c",
-					"begin": "(,)\\s*(?=(?:L|u8|u|U\\s*\\\")?)",
-					"beginCaptures": {
-						"1": {
-							"name": "punctuation.separator.delimiter.comma.c"
-						}
-					},
-					"end": "(?=\\))",
-					"patterns": [
-						{
-							"include": "#string_context"
-						}
-					]
-				},
-				{
-					"include": "#evaluation_context"
-				}
-			]
-		},
 		"storage_types": {
 			"patterns": [
 				{
@@ -1421,150 +1334,6 @@
 					]
 				}
 			]
-		},
-		"switch_conditional_parentheses": {
-			"name": "meta.conditional.switch.c",
-			"begin": "((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))(\\()",
-			"beginCaptures": {
-				"1": {
-					"patterns": [
-						{
-							"include": "#inline_comment"
-						}
-					]
-				},
-				"2": {
-					"name": "comment.block.c punctuation.definition.comment.begin.c"
-				},
-				"3": {
-					"name": "comment.block.c"
-				},
-				"4": {
-					"patterns": [
-						{
-							"match": "\\*\\/",
-							"name": "comment.block.c punctuation.definition.comment.end.c"
-						},
-						{
-							"match": "\\*",
-							"name": "comment.block.c"
-						}
-					]
-				},
-				"5": {
-					"name": "punctuation.section.parens.begin.bracket.round.conditional.switch.c"
-				}
-			},
-			"end": "(\\))",
-			"endCaptures": {
-				"1": {
-					"name": "punctuation.section.parens.end.bracket.round.conditional.switch.c"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#evaluation_context"
-				},
-				{
-					"include": "#c_conditional_context"
-				}
-			]
-		},
-		"switch_statement": {
-			"name": "meta.block.switch.c",
-			"begin": "(((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))((?<!\\w)switch(?!\\w)))",
-			"beginCaptures": {
-				"1": {
-					"name": "meta.head.switch.c"
-				},
-				"2": {
-					"patterns": [
-						{
-							"include": "#inline_comment"
-						}
-					]
-				},
-				"3": {
-					"name": "comment.block.c punctuation.definition.comment.begin.c"
-				},
-				"4": {
-					"name": "comment.block.c"
-				},
-				"5": {
-					"patterns": [
-						{
-							"match": "\\*\\/",
-							"name": "comment.block.c punctuation.definition.comment.end.c"
-						},
-						{
-							"match": "\\*",
-							"name": "comment.block.c"
-						}
-					]
-				},
-				"6": {
-					"name": "keyword.control.switch.c"
-				}
-			},
-			"end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
-			"patterns": [
-				{
-					"name": "meta.head.switch.c",
-					"begin": "\\G ?",
-					"end": "((?:\\{|<%|\\?\\?<|(?=;)))",
-					"endCaptures": {
-						"1": {
-							"name": "punctuation.section.block.begin.bracket.curly.switch.c"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#switch_conditional_parentheses"
-						},
-						{
-							"include": "$self"
-						}
-					]
-				},
-				{
-					"name": "meta.body.switch.c",
-					"begin": "(?<=\\{|<%|\\?\\?<)",
-					"end": "(\\}|%>|\\?\\?>)",
-					"endCaptures": {
-						"1": {
-							"name": "punctuation.section.block.end.bracket.curly.switch.c"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#default_statement"
-						},
-						{
-							"include": "#case_statement"
-						},
-						{
-							"include": "$self"
-						},
-						{
-							"include": "#block_innards"
-						}
-					]
-				},
-				{
-					"name": "meta.tail.switch.c",
-					"begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-					"end": "[\\s\\n]*(?=;)",
-					"patterns": [
-						{
-							"include": "$self"
-						}
-					]
-				}
-			]
-		},
-		"vararg_ellipses": {
-			"match": "(?<!\\.)\\.\\.\\.(?!\\.)",
-			"name": "punctuation.vararg-ellipses.c"
 		}
 	}
 }
